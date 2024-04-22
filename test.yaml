@@ -8,6 +8,6 @@ jobs:
 - job: Rithwik_Job2
   displayName: 'Rithwik_Job2'
   dependsOn: Rithwik_Job1
-  condition: eq(dependencies.Job1.outputs['myTaskName.buildScope'], 'public')
+  condition: eq(dependencies.Job1.outputs['rithtask.buildScope'], 'public')
   steps:
   - script: echo "Hello Rithwik your testScope is public"
