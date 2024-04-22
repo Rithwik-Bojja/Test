@@ -1,0 +1,13 @@
+jobs:
+- job: Job1
+  displayName: 'Job 1'
+  steps:
+  - pwsh: ./myFile.ps1 
+    name: myTaskName
+
+- job: Job2
+  displayName: 'Job 2'
+  dependsOn: Job1
+  condition: eq(dependencies.Job1.outputs['myTaskName.buildScope'], 'public')
+  steps:
+  - script: echo "Do something based on buildScope"
