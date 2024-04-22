@@ -2,7 +2,7 @@ jobs:
 - job: Job1
   displayName: 'Job 1'
   steps:
-  - pwsh: ./myFile.ps1 
+  - pwsh: ./rith.ps1 
     name: myTaskName
 
 - job: Job2
