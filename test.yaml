@@ -10,4 +10,4 @@ jobs:
   dependsOn: Rithwik_Job1
   condition: eq(dependencies.Job1.outputs['myTaskName.buildScope'], 'public')
   steps:
-  - script: echo "Do something based on buildScope"
+  - script: echo "Hello Rithwik your testScope is public"
