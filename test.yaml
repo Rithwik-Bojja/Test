@@ -1,13 +1,15 @@
 jobs:
-- job: Rithwik_Job1
-  displayName: 'Rithwik_Job1'
+- job: Rithwik_Job
+  displayName: 'Rithwik_Job'
   steps:
   - pwsh: ./rith.ps1 
     name: rithtask
+  - script: |
+           if ("$(rithtask.buildScope)" -eq "public") {
+        echo "Hello Rithwik, buildScope is Public"
+      } else {
+        echo "Hello Rithwik, rithtask is not public"
+        exit 0 
+      }
+  - script: echo "Continue with your others steps and operations Rithwol"
 
-- job: Rithwik_Job2
-  displayName: 'Rithwik_Job2'
-  dependsOn: Rithwik_Job1
-  condition: eq(dependencies.Rithwik_Job1.outputs['rithtask.buildScope'], 'public')
-  steps:
-  - script: echo "Hello Rithwik your testScope is public"
