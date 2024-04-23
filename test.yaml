@@ -6,8 +6,8 @@ jobs:
     name: rithtask
   - script: |
       if ("$(rithtask.buildScope)" -eq "public") {
-        Write-Host "Hello Rithwik, buildScope is Public"
+        echo "Hello Rithwik, buildScope is Public"
       } else {
-        Write-Host "Hello Rithwik, rithtask is not public"
+        echo "Hello Rithwik, rithtask is not public"
         exit 0        }
   - script: echo "Continue with your others steps and operations Rithwik"
