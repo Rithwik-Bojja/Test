@@ -1,18 +1,16 @@
 jobs:
-- job: Job1
-  displayName: 'Job 1'
+- job: Rithwik_Job
+  displayName: 'Rithwik_Job'
   steps:
   - pwsh: ./rith.ps1 
-    name: myTaskName
+    name: rithtask
   - powershell: |
-      # Check the value of the output variable
-      if ("$(myTaskName.buildScope)" -eq "public") {
-        echo "Do something based on buildScope"
+      if ("$(rithtask.buildScope)" -eq "public") {
+        echo "Hello Rithwik, buildScope is Public"
       } else {
-        echo "Skip further actions because buildScope is not public"
-        exit 0  # Exit with success code to skip subsequent steps
-      }
+        echo "Hello Rithwik, rithtask is not public"
+        exit 0        }
     displayName: 'Run PowerShell script'
 
-  - script: echo "Continue with additional steps"
-    displayName: 'Echo message'
+  - script: echo "Continue with your others steps and operations Rithwik"
+    displayName: 'Hello Rithwik Echo'
