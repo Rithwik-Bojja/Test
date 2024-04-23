@@ -5,11 +5,9 @@ jobs:
   - pwsh: ./rith.ps1 
     name: rithtask
   - script: |
-        if ("$(rithtask.buildScope)" -eq "public") {
-         echo "Hello Rithwik, buildScope is Public"
+      if ("$(rithtask.buildScope)" -eq "public") {
+        Write-Host "Hello Rithwik, buildScope is Public"
       } else {
-         echo "Hello Rithwik, rithtask is not public"
-         exit 0 
-      }
-  - script: echo "Continue with your others steps and operations Rithwol"
-
+        Write-Host "Hello Rithwik, rithtask is not public"
+        exit 0        }
+  - script: echo "Continue with your others steps and operations Rithwik"
