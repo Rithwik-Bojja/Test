@@ -11,5 +11,5 @@ jobs:
         echo "Hello Rithwik, rithtask is not public"
         exit 0 
       }
-  - script: echo "Continue with your others steps and operations Rithwol"
+  - script: echo "Continue with your others steps and operations RithwiK"
 
