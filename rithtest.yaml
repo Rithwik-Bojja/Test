@@ -20,7 +20,7 @@ jobs:
 
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'github.com_Rithwik-Bojja'  # Use the ARM service connection name here
+      azureSubscription: 'rithwiktesy'  # Use the ARM service connection name here
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
       inlineScript: |
