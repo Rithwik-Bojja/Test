@@ -39,8 +39,6 @@ jobs:
         # Calculate the start time by adding the specified number of hours to the current time
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
         
-        # Authenticate with Azure
-        Connect-AzAccount -Identity
 
         # Check if the runbook exists
         $runbook = Get-AzAutomationRunbook -AutomationAccountName $automationAccount -Name $runBookName -ResourceGroupName $automationRg
