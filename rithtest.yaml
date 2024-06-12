@@ -26,6 +26,8 @@ jobs:
         $brand = "test"
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
         Write-Host "Calculated Start Time: $startTime"
+        Connect-AzAccount -Identity
+        Set-AzContext -Subscription "Visual Studio Enterprise Subscription"
         $scheduler = New-AzAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
         Write-Host "Schedule created: $($scheduler.Name)"
         Register-AzAutomationScheduledRunbook -AutomationAccountName $automationAccount -ResourceGroupName $automationRg -RunbookName $runBookName -ScheduleName $scheduler.Name -Parameters @{
