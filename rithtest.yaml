@@ -12,7 +12,7 @@ jobs:
 
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'rithwiktesy'  
+      azureSubscription: 'test1'  
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
       inlineScript: |
