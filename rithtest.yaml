@@ -47,10 +47,6 @@ jobs:
         # Calculate the start time by adding the specified number of hours to the current time
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
         Write-Host "Calculated Start Time: $startTime"
-
-        # Check if the runbook exists
-        $runbook = Get-AzAutomationRunbook -AutomationAccountName $automationAccount -Name $runBookName -ResourceGroupName $automationRg
-        Write-Host "Runbook found: $($runbook.Name)"
         
         # Create the schedule
         $scheduler = New-AzAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
