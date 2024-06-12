@@ -4,14 +4,6 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  automationAccount: 'rithwik98'
-  automationRg: 'v-rbojja-Mindtree'
-  runBookName: 'rithwik'
-  TimeZone: 'Australia/Sydney'
-  deleteContainerAppIn: 4  
-  brand: 'test'
-
 jobs:
 - job: RegisterScheduledRunbook
   displayName: 'Register Scheduled Runbook'
@@ -20,39 +12,23 @@ jobs:
 
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'rithwiktesy'  # Use the ARM service connection name here
+      azureSubscription: 'rithwiktesy'  
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        # Install the Az module if not already installed
         Install-Module -Name Az -Force -Scope CurrentUser -AllowClobber
         Import-Module -Name Az -Force
-        
-        # Define variables
-        $automationAccount = "${{ variables.automationAccount }}"
-        $automationRg = "${{ variables.automationRg }}"
-        $runBookName = "${{ variables.runBookName }}"
-        $TimeZone = "${{ variables.TimeZone }}"
-        $deleteContainerAppIn = ${{ variables.deleteContainerAppIn }}
-        $brand = "${{ variables.brand }}"
-        
-        # Output debug information
-        Write-Host "Automation Account: $automationAccount"
-        Write-Host "Resource Group: $automationRg"
-        Write-Host "Runbook Name: $runBookName"
-        Write-Host "Time Zone: $TimeZone"
-        Write-Host "Delete Container App In: $deleteContainerAppIn"
-        Write-Host "Brand: $brand"
-        
-        # Calculate the start time by adding the specified number of hours to the current time
+        $automationAccount = "rithwik98"
+        $automationRg = "v-rbojja-Mindtree"
+        $runBookName = "rithwik"
+        $TimeZone = "Australia/Sydney"
+        $deleteContainerAppIn = 4
+        $brand = "test"
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
         Write-Host "Calculated Start Time: $startTime"
-        
-        # Create the schedule
         $scheduler = New-AzAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
+        Connect-AzAccount -Identity
         Write-Host "Schedule created: $($scheduler.Name)"
-        
-        # Register the scheduled runbook
         Register-AzAutomationScheduledRunbook -AutomationAccountName $automationAccount -ResourceGroupName $automationRg -RunbookName $runBookName -ScheduleName $scheduler.Name -Parameters @{
           'RESOURCEGROUP' = 'v-rbojja-Mindtree'
           'APPNAME' = 'test-app-del'
