@@ -27,7 +27,6 @@ jobs:
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
         Write-Host "Calculated Start Time: $startTime"
         $scheduler = New-AzAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
-        Connect-AzAccount -Identity
         Write-Host "Schedule created: $($scheduler.Name)"
         Register-AzAutomationScheduledRunbook -AutomationAccountName $automationAccount -ResourceGroupName $automationRg -RunbookName $runBookName -ScheduleName $scheduler.Name -Parameters @{
           'RESOURCEGROUP' = 'v-rbojja-Mindtree'
