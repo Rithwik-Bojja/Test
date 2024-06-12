@@ -1,0 +1,45 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  automationAccount: 'rithwik98'
+  automationRg: 'v-rbojja-Mindtree'
+  runBookName: 'rithwik'
+  TimeZone: 'Australia/Sydney'
+  deleteContainerAppIn: 4  
+  brand: 'test'
+
+jobs:
+- job: RegisterScheduledRunbook
+  displayName: 'Hello Rithwik, Registering for Runbook'
+  steps:
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'github.com_Rithwik-Bojja'
+      scriptType: 'ps'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        # Define variables
+        $automationAccount = "${{ variables.automationAccount }}"
+        $automationRg = "${{ variables.automationRg }}"
+        $runBookName = "${{ variables.runBookName }}"
+        $TimeZone = "${{ variables.TimeZone }}"
+        $deleteContainerAppIn = ${{ variables.deleteContainerAppIn }}
+        $brand = "${{ variables.brand }}"
+        
+        $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
+        
+        $runbook = Get-AzureRmAutomationRunbook -AutomationAccountName $automationAccount -Name $runBookName -ResourceGroupName $automationRg
+        
+        $scheduler = New-AzureRmAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
+        
+        Register-AzureRmAutomationScheduledRunbook -AutomationAccountName $automationAccount -ResourceGroupName $automationRg -RunbookName $runBookName -ScheduleName $scheduler.Name -Parameters @{
+          'RESOURCEGROUP' = 'v-rbojja-Mindtree'
+          'APPNAME' = 'test-app-del'
+          'SUBSCRIPTIONID' = 'b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f'
+          'BRAND' = 'MS'
+          'ENV' = 'dev'
+        } -ErrorAction Stop -Verbose -Debug
