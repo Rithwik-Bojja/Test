@@ -24,6 +24,10 @@ jobs:
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
       inlineScript: |
+        # Install the Az module if not already installed
+        Install-Module -Name Az -Force -Scope CurrentUser -AllowClobber
+        Import-Module -Name Az -Force
+        
         # Define variables
         $automationAccount = "${{ variables.automationAccount }}"
         $automationRg = "${{ variables.automationRg }}"
@@ -34,7 +38,9 @@ jobs:
         
         # Calculate the start time by adding the specified number of hours to the current time
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
-  
+        
+        # Authenticate with Azure
+        Connect-AzAccount -Identity
 
         # Check if the runbook exists
         $runbook = Get-AzAutomationRunbook -AutomationAccountName $automationAccount -Name $runBookName -ResourceGroupName $automationRg
