@@ -36,15 +36,25 @@ jobs:
         $deleteContainerAppIn = ${{ variables.deleteContainerAppIn }}
         $brand = "${{ variables.brand }}"
         
+        # Output debug information
+        Write-Host "Automation Account: $automationAccount"
+        Write-Host "Resource Group: $automationRg"
+        Write-Host "Runbook Name: $runBookName"
+        Write-Host "Time Zone: $TimeZone"
+        Write-Host "Delete Container App In: $deleteContainerAppIn"
+        Write-Host "Brand: $brand"
+        
         # Calculate the start time by adding the specified number of hours to the current time
         $startTime = [System.DateTimeOffset]::Now.AddHours($deleteContainerAppIn)
-        
+        Write-Host "Calculated Start Time: $startTime"
 
         # Check if the runbook exists
         $runbook = Get-AzAutomationRunbook -AutomationAccountName $automationAccount -Name $runBookName -ResourceGroupName $automationRg
+        Write-Host "Runbook found: $($runbook.Name)"
         
         # Create the schedule
         $scheduler = New-AzAutomationSchedule -AutomationAccountName $automationAccount -Name "$brand-aa-sch-eau" -OneTime -ResourceGroupName $automationRg -StartTime $startTime -TimeZone $TimeZone
+        Write-Host "Schedule created: $($scheduler.Name)"
         
         # Register the scheduled runbook
         Register-AzAutomationScheduledRunbook -AutomationAccountName $automationAccount -ResourceGroupName $automationRg -RunbookName $runBookName -ScheduleName $scheduler.Name -Parameters @{
@@ -54,3 +64,4 @@ jobs:
           'BRAND' = 'MS'
           'ENV' = 'dev'
         } -ErrorAction Stop -Verbose -Debug
+        Write-Host "Scheduled runbook registered successfully."
