@@ -5,16 +5,17 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  test: 'Rithwik Bojja'
+  rith: 'Secret'
 
 jobs:
 - job: Build
-  displayName: 'Test Build'
+  displayName: 'Testing Building'
   steps:
   - script: |
       echo "Hello"
-  - script: |
-      echo "##vso[task.setvariable variable=rivar;isOutput=true]$(test)"
-  - script: |
-      echo "Output variable value: $(rivar)"
-    displayName: 'Value of Variable set'
+  - powershell: |
+      echo "##vso[task.setvariable variable=test]$(rith)"
+    displayName: 'Variable setting is being done Rithwik'
+  - powershell: |
+      echo "Value of var is $(test)"
+    displayName: 'Printing Varibale Value Rithwik'
