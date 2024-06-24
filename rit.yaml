@@ -13,14 +13,8 @@ jobs:
   steps:
   - script: |
       echo "Hello"
-
-- job: Release
-  displayName: 'Rith_Test_Job'
-  dependsOn: Build
-  steps:
   - script: |
       echo "##vso[task.setvariable variable=rivar;isOutput=true]$(test)"
-
   - script: |
       echo "Output variable value: $(rivar)"
     displayName: 'Value of Variable set'
