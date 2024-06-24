@@ -2,40 +2,25 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
-  myValue: 'Hello, World!'
+  test: 'Rithwik Bojja'
 
 jobs:
 - job: Build
-  displayName: 'Build job'
+  displayName: 'Test Build'
   steps:
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '5.x'
-      installationPath: $(Agent.ToolsDirectory)/dotnet
   - script: |
-      dotnet build --configuration Release
-    displayName: 'Build the project'
+      echo "Hello"
 
 - job: Release
-  displayName: 'Release job'
+  displayName: 'Rith_Test_Job'
   dependsOn: Build
   steps:
   - script: |
-      echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]$(myValue)"
-    displayName: 'Set output variable'
+      echo "##vso[task.setvariable variable=rivar;isOutput=true]$(test)"
 
   - script: |
-      echo "Output variable value: $(myOutputVar)"
-    displayName: 'Print output variable'
-
-  - script: |
-      echo "##vso[task.setvariable variable=anotherVar;isOutput=true]Another value"
-    displayName: 'Set another output variable'
-  
-  - script: |
-      echo "Another variable value: $(anotherVar)"
-    displayName: 'Print another variable'
+      echo "Output variable value: $(rivar)"
+    displayName: 'Value of Variable set'
