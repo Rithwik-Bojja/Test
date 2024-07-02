@@ -8,7 +8,7 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'yourAzureServiceConnection'  # Replace with your Azure service connection name
+    azureResourceManagerConnection: 'test1'  # Replace with your Azure service connection name
     subscriptionId: 'b83c1ed3-c5b6-44fb-b5ba-2b83a074c23f'  # Replace with your Azure subscription ID
     resourceGroupName: 'v-rbojja-Mindtree'  # Replace with your Azure resource group name
     location: 'East US'  # Replace with your Azure region
