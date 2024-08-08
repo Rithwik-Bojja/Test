@@ -12,6 +12,6 @@ jobs:
 - job: Test
   steps:
   - script: echo $(Test)
-    condition: and(succeeded(), eq('${{ parameters.Foo }}', 'true'))
+    condition: and(succeeded(), eq('${{ parameters.Test }}', 'true'))
   - script: echo "Test is false"
-    condition: and(succeeded(), eq('${{ parameters.Foo }}', 'false'))
+    condition: and(succeeded(), eq('${{ parameters.Test }}', 'false'))
