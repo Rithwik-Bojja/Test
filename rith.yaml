@@ -1,0 +1,15 @@
+trigger:
+  branches:
+    include:
+      - main
+
+parameters:
+  - name: Foo
+    type: boolean
+    default: true
+
+jobs:
+  - job: Build
+    steps:
+      - script: echo "The value of Foo is ${{ parameters.Foo }}"
+        displayName: 'Print Boolean Parameter'
