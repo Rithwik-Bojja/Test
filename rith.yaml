@@ -11,5 +11,7 @@ parameters:
 jobs:
   - job: Build
     steps:
-      - script: echo "Hello Rithwik Bojja, The value of Test param is ${{ parameters.Test }}"
-        displayName: 'Rithwik is Printing Bollean value'
+       - script: echo $(Foo)
+    condition: and(succeeded(), eq('${{ parameters.Test }}', 'true'))
+  - script: echo "Foo is false"
+    condition: and(succeeded(), eq('${{ parameters.Test }}', 'false'))
