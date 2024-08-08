@@ -4,12 +4,12 @@ trigger:
       - main
 
 parameters:
-  - name: Foo
+  - name: Test
     type: boolean
     default: true
 
 jobs:
   - job: Build
     steps:
-      - script: echo "The value of Foo is ${{ parameters.Foo }}"
-        displayName: 'Print Boolean Parameter'
+      - script: echo "Hello Rithwik Bojjam The value of Test param is ${{ parameters.Foo }}"
+        displayName: 'Rithwik is Printing Bollean value'
