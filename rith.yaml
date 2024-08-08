@@ -11,5 +11,5 @@ parameters:
 jobs:
   - job: Build
     steps:
-      - script: echo "Hello Rithwik Bojjam The value of Test param is ${{ parameters.Foo }}"
+      - script: echo "Hello Rithwik Bojja, The value of Test param is ${{ parameters.Test }}"
         displayName: 'Rithwik is Printing Bollean value'
