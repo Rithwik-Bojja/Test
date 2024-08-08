@@ -11,7 +11,7 @@ parameters:
 jobs:
   - job: Build
     steps:
-       - script: echo $(Foo)
+       - script: echo $(Test)
     condition: and(succeeded(), eq('${{ parameters.Test }}', 'true'))
-  - script: echo "Foo is false"
+  - script: echo "Test is false"
     condition: and(succeeded(), eq('${{ parameters.Test }}', 'false'))
