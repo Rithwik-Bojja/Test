@@ -22,7 +22,7 @@ steps:
 
       # Dynamically resolve a value
       echo "Fetching resource group names dynamically..."
-      preDeploymentRgList=$(az group list --subscription "$(var-hub-subscriptionId)" --query "[].name" -o tsv)
+      preDeploymentRgList=$(az group list --subscription "ACES CORE-BAMI-MT-V-RBOJJA" --query "[].name" -o tsv)
       echo "Resource Group List from az group list command: $preDeploymentRgList"
 
       # Convert to a comma-separated string
