@@ -1,0 +1,33 @@
+- task: AzureCLI@2
+  displayName: 'Demonstrate Variable vs Hardcoded Value in Azure CLI Command'
+  inputs:
+    azureSubscription: $(serviceConnectionName)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # Hardcoded value
+      hardcodedValue='myRgName1,myRgName2'
+      echo "Hardcoded Value: $hardcodedValue"
+
+      # Example of dynamically resolving a variable
+      # Fetch resource group names as a list
+      preDeploymentRgList=$(az group list --subscription "$(var-hub-subscriptionId)" --query "[].name" -o tsv)
+      echo "Resource Group List from az group list command: $preDeploymentRgList"
+
+      # Convert to a comma-separated string using Bash
+      bash_array=(${preDeploymentRgList})
+      IFS=',' read -r -a preDeploymentRgListName <<< "${bash_array[*]}"
+      echo "Variable Value (Generated from Script): $preDeploymentRgListName"
+
+      # Compare the values
+      echo "Difference:"
+      echo "Hardcoded: $hardcodedValue"
+      echo "Variable: $preDeploymentRgListName"
+
+      # Pass the dynamically created variable to an Azure CLI command (example)
+      az deployment sub create \
+        --name demoDeployment \
+        --location eastus \
+        --subscription $(var-hub-subscriptionId) \
+        --template-file template.bicep \
+        --parameters preDeploymentRgListName="$preDeploymentRgListName"
