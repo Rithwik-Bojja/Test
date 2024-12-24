@@ -26,11 +26,10 @@ steps:
       echo "Resource Group List from az group list command: $preDeploymentRgList"
 
       # Convert to a comma-separated string
-      bash_array=(${preDeploymentRgList})
-      IFS=',' read -r -a preDeploymentRgListName <<< "${bash_array[*]}"
-      echo "Variable Value (Generated from Script): $preDeploymentRgListName"
+      dynamicValue=$(echo "$preDeploymentRgList" | tr '\n' ',' | sed 's/,$//')
+      echo "Dynamic Value (Comma-Separated): $dynamicValue"
 
       # Compare the values
       echo "Comparing Values:"
       echo "Hardcoded: $hardcodedValue"
-      echo "Dynamic: $preDeploymentRgListName"
+      echo "Dynamic: $dynamicValue"
