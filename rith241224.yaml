@@ -22,8 +22,4 @@ steps:
       echo "Hello Rithwik, Output of az group list cmd is : $rith_rg_list"
 
       ri_dv=$(echo "$rith_rg_list" | tr '\n' ' ' | sed 's/,$//')
-      ri_dv=""
-      while IFS= read -r line; do
-        dynamicValue+="$line"
-      done <<< "$preDeploymentRgList"
       echo "Dynamic Value (Comma-Separated): $ri_dv"
