@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows'
+  vmImage: 'ubuntu-latest'
 
 variables:
   rith_hd_vl: 'rithwik,rithpyser'
