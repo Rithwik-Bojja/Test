@@ -21,5 +21,5 @@ steps:
       rith_rg_list=$(az group list --subscription "ACES CORE-BAMI-MT-V-RBOJJA" --query "[].name" -o tsv)
       echo "Hello Rithwik, Output of az group list cmd is : $rith_rg_list"
 
-      ri_dv=$(echo "$rith_rg_list" | tr '\n' ',' | sed 's/,$//')
+      ri_dv=$(echo "$rith_rg_list" | tr '\n' '' | sed 's/,$//')
       echo "Dynamic Value (Comma-Separated): $ri_dv"
